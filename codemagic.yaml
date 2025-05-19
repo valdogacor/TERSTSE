@@ -4,15 +4,16 @@ workflows:
     environment:
       flutter: stable
       xcode: latest
+      vars:
+        CERTIFICATE_PASSWORD: Envs.CERTIFICATE_PASSWORD
 
-      # ✅ Letakkan code_signing di dalam environment
-      code_signing:
-        ios:
-          distribution_certificate:
-            certificate: $CM_CERTIFICATE
-            certificate_password: $CERTIFICATE_PASSWORD
-          provisioning_profile:
-            profile: $CM_PROVISIONING_PROFILE
+    code_signing:
+      ios:
+        distribution_certificate:
+          certificate: $CM_CERTIFICATE
+          certificate_password: $CERTIFICATE_PASSWORD
+        provisioning_profile:
+          profile: $CM_PROVISIONING_PROFILE
 
     scripts:
       - name: Get dependencies
