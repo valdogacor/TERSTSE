@@ -4,17 +4,21 @@ workflows:
     environment:
       flutter: stable
       xcode: latest
+
+      # ✅ Letakkan code_signing di dalam environment
+      code_signing:
+        ios:
+          distribution_certificate:
+            certificate: $CM_CERTIFICATE
+            certificate_password: $CERTIFICATE_PASSWORD
+          provisioning_profile:
+            profile: $CM_PROVISIONING_PROFILE
+
     scripts:
       - name: Get dependencies
         script: flutter pub get
       - name: Build IPA
         script: flutter build ipa --export-method ad-hoc
-    code_signing:
-      ios:
-        distribution_certificate:
-          certificate: $CM_CERTIFICATE
-          certificate_password: $CERTIFICATE_PASSWORD
-        provisioning_profile:
-          profile: $CM_PROVISIONING_PROFILE
+
     artifacts:
       - build/ios/ipa/*.ipa
